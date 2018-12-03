@@ -1,4 +1,6 @@
-function getData(url, cb) {
+const baseURL = "https://swapi.co/api/";
+
+function getData(type, cb) {
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function() {
@@ -7,41 +9,26 @@ function getData(url, cb) {
         }
     };
 
-    xhr.open("GET", url);
+    xhr.open("GET", baseURL + type + "/");
     xhr.send();
 }
 
 function getTableHeaders(obj) {
     var tableHeaders = [];
 
-    Object.keys(obj).forEach(function(key) {
-        tableHeaders.push(`<td>${key}</td>`);
+    Object.keys(item).forEach(function(key) {
+        tableHeaders.push(`<td>${key}</td>`)
     });
 
-    return `<tr>${tableHeaders}</tr>`;
+    return `<tr>${tableHeaders}</td>`;
 }
 
-function generatePaginationButtons(next, prev) {
-    if (next && prev) {
-        return `<button onclick="writeToDocument('${prev}')">Previous</button>
-                <button onclick="writeToDocument('${next}')">Next</button>`;
-    } else if (next && !prev) {
-        return `<button onclick="writeToDocument('${next}')">Next</button>`;
-    } else if (!next && prev) {
-        return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
-    }
-}
-
-function writeToDocument(url) {
-    var tableRows = [];
+function writeToDocument(type) {
     var el = document.getElementById("data");
+    el.innerHTML = "";
 
-    getData(url, function(data) {
-        var pagination = "";
-
-        if (data.next || data.previous) {
-            pagination = generatePaginationButtons(data.next, data.previous);
-        }
+    getData(type, function(data) {
+        var tableRows = [];
         data = data.results;
         var tableHeaders = getTableHeaders(data[0]);
 
@@ -49,13 +36,11 @@ function writeToDocument(url) {
             var dataRow = [];
 
             Object.keys(item).forEach(function(key) {
-                var rowData = item[key].toString();
-                var truncatedData = rowData.substring(0, 15);
-                dataRow.push(`<td>${truncatedData}</td>`);
+                dataRow.push(`<td>${item[key]}</td>`);
             });
-            tableRows.push(`<tr>${dataRow}</tr>`);
+            tableRows.push(dataRow)
         });
 
-        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`;
+        el.innerHTML = `<table>${tableHeaders}</table>`;
     });
 }

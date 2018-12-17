@@ -1,4 +1,6 @@
-function getData(url, cb) {
+const baseURL = "https://swapi.co/api/";
+
+function getData(type, cb) {
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function() {
@@ -7,7 +9,7 @@ function getData(url, cb) {
         }
     };
 
-    xhr.open("GET", url);
+    xhr.open("GET", baseURL + type + "/");
     xhr.send();
 }
 
@@ -21,27 +23,11 @@ function getTableHeaders(obj) {
     return `<tr>${tableHeaders}</tr>`;
 }
 
-function generatePaginationButtons(next, prev) {
-    if (next && prev) {
-        return `<button onclick="writeToDocument('${prev}')">Previous</button>
-                <button onclick="writeToDocument('${next}')">Next</button>`;
-    } else if (next && !prev) {
-        return `<button onclick="writeToDocument('${next}')">Next</button>`;
-    } else if (!next && prev) {
-        return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
-    }
-}
-
-function writeToDocument(url) {
+function writeToDocument(type) {
     var tableRows = [];
     var el = document.getElementById("data");
 
-    getData(url, function(data) {
-        var pagination = "";
-
-        if (data.next || data.previous) {
-            pagination = generatePaginationButtons(data.next, data.previous);
-        }
+    getData(type, function(data) {
         data = data.results;
         var tableHeaders = getTableHeaders(data[0]);
 
@@ -56,6 +42,6 @@ function writeToDocument(url) {
             tableRows.push(`<tr>${dataRow}</tr>`);
         });
 
-        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`;
+        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
     });
 }

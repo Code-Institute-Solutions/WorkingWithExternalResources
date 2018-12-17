@@ -16,7 +16,7 @@ function getData(type, cb) {
 function getTableHeaders(obj) {
     var tableHeaders = [];
 
-    Object.keys(item).forEach(function(key) {
+    Object.keys(obj).forEach(function(key) {
         tableHeaders.push(`<td>${key}</td>`)
     });
 

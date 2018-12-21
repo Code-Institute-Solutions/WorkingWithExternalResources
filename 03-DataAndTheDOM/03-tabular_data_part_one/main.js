@@ -20,7 +20,7 @@ function getTableHeaders(obj) {
         tableHeaders.push(`<td>${key}</td>`)
     });
 
-    return `<tr>${tableHeaders}</td>`;
+    return `<tr>${tableHeaders}</tr>`;
 }
 
 function writeToDocument(type) {

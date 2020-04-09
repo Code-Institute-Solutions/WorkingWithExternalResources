@@ -1,8 +1,4 @@
-# Update the packages installed on the operating system
-sudo apt update
-
-# Install the `links` browser 
-sudo apt install 
+# Use our gitpod-full-template so that Links is automatically installed
 
 # Clear the terminal
 clear

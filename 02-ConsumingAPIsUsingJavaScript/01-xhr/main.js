@@ -6,6 +6,6 @@ xhr.onreadystatechange = function() {
     }
 };
 
-xhr.open("GET", "https://swapi.co/api/");
+xhr.open("GET", "https://ci-swapi.herokuapp.com/api/");
 
 xhr.send();

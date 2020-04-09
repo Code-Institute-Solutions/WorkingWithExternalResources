@@ -1,7 +1,7 @@
 function getData(cb) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "https://swapi.co/api/");
+    xhr.open("GET", "https://ci-swapi.herokuapp.com/api/");
     xhr.send();
 
     xhr.onreadystatechange = function() {

@@ -1,7 +1,7 @@
 var xhr = new XMLHttpRequest();
 var data;
 
-xhr.open("GET", "https://swapi.co/api/");
+xhr.open("GET", "https://ci-swapi.herokuapp.com/api/");
 xhr.send();
 
 function setData(jsonData) {

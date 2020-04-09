@@ -1,4 +1,4 @@
-const baseURL = "https://swapi.co/api/";
+const baseURL = "https://ci-swapi.herokuapp.com/api/";
 
 function getData(type, cb) {
     var xhr = new XMLHttpRequest();
